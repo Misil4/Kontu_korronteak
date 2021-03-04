@@ -13,7 +13,7 @@ class Bankuetxea {
 
     Bankuetxea() {
         super();
-        this.NAN = "12345678u";
+        NAN = "12345678u";
         izena = "aitor";
         abizena = "lezama";
         helbidea = "herria";
@@ -34,31 +34,33 @@ class Bankuetxea {
 }
 
 public class Kontu_korronteak extends Bankuetxea {
-    protected int Dirua, Komisioa;
+    protected String Dirua, Komisioa;
 
     Kontu_korronteak() {
-        Dirua = 1200;
-        Komisioa = 20;
+        Dirua = "1200";
+        Komisioa = "20";
     }
 
     Kontu_korronteak(String NAN, String izena, String abizena, String helbidea, String herria, String telefonoa,
-            String kontu_tipo, int diru, int komisio, String kontu_korrontea[][], String aurrezteko_kontua[][]) {
-        super(NAN, izena, abizena, helbidea, herria, telefonoa, kontu_tipo);
+            String kontu_tipo, String diru, String komisio) {
+        super();
         Dirua = diru;
         Komisioa = komisio;
     }
 
     String[][] Kontu_korrontea_sortu(Kontu_korronteak n1) {
-        String[][] kontu_korrontea = new String[100][7];
-        String[][] aurrezteko_kontua = new String[100][7];
+        String[][] kontu_korrontea = new String[100][9];
+        // String[][] aurrezteko_kontua = new String[100][7];
         // comprobar que tipo de cuenta es
-        kontu_korrontea[kontu_kopuru][0] = n1.NAN;
-        kontu_korrontea[kontu_kopuru][1] = n1.izena;
-        kontu_korrontea[kontu_kopuru][2] = n1.abizena;
-        kontu_korrontea[kontu_kopuru][3] = n1.helbidea;
-        kontu_korrontea[kontu_kopuru][4] = n1.herria;
-        kontu_korrontea[kontu_kopuru][5] = n1.telefonoa;
-        kontu_korrontea[kontu_kopuru][6] = n1.kontu_tipo;
+        kontu_korrontea[0][0] = n1.NAN;
+        kontu_korrontea[0][1] = n1.izena;
+        kontu_korrontea[0][2] = n1.abizena;
+        kontu_korrontea[0][3] = n1.helbidea;
+        kontu_korrontea[0][4] = n1.herria;
+        kontu_korrontea[0][5] = n1.telefonoa;
+        kontu_korrontea[0][6] = n1.kontu_tipo;
+        kontu_korrontea[0][7] = n1.Dirua;
+        kontu_korrontea[0][8] = n1.Komisioa;
         kontu_kopuru++;
         return kontu_korrontea;
     }
@@ -81,23 +83,25 @@ class main {
                 switch (aukera1) {
                     case 1:
                         int kont = 0;
-                        Kontu_korronteak Erabiltzailea = new Kontu_korronteak();
+                        String NAN,izena,abizena,helbidea,herria,telefonoa,kontu_tipo;
                         System.out.println("Sartu NAN-a");
-                        Erabiltzailea.NAN = sc.nextLine();
+                        NAN = sc.nextLine();
                         System.out.println("Sartu izena");
-                        Erabiltzailea.izena = sc.nextLine();
+                        izena = sc.nextLine();
                         System.out.println("Sartu abizena");
-                        Erabiltzailea.abizena = sc.nextLine();
+                        abizena = sc.nextLine();
                         System.out.println("Sartu helbidea");
-                        Erabiltzailea.helbidea = sc.nextLine();
+                        helbidea = sc.nextLine();
                         System.out.println("Sartu herria");
-                        Erabiltzailea.herria = sc.nextLine();
+                        herria = sc.nextLine();
                         System.out.println("Sartu telefonoa");
-                        Erabiltzailea.telefonoa = sc.nextLine();
-                        System.out.println(Erabiltzailea.NAN + " " + Erabiltzailea.izena + " " + Erabiltzailea.abizena);
-                        String kontu_korrontea[][] = Erabiltzailea.Kontu_korrontea_sortu(Erabiltzailea);
-                        for (int i = 0; i < kontu_korrontea[Erabiltzailea.kontu_kopuru].length; i++) {
-                            System.out.println(kontu_korrontea[Erabiltzailea.kontu_kopuru][i]);
+                        telefonoa = sc.nextLine();
+                        System.out.println("Ze kontu tipo nahi duzu");
+                        kontu_tipo = sc.nextLine();
+                        Kontu_korronteak Erabiltzailea = new Kontu_korronteak(NAN,izena,abizena,helbidea,herria,telefonoa,kontu_tipo,"0","15");
+                        String kontu_korronteak[][] = Erabiltzailea.Kontu_korrontea_sortu(Erabiltzailea);
+                        for (int i = 0;i<kontu_korronteak[Erabiltzailea.kontu_kopuru].length;i++) {
+                            System.out.println(kontu_korronteak[Erabiltzailea.kontu_kopuru][i]);
                         }
                     case 3:
                         System.out.println(
