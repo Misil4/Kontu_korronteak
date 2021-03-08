@@ -25,6 +25,42 @@ public class Banco {
         cuentas[contador] = null;
         contador--;
     }
+    public void IngresarDinero(double i,int j){
+        this.cuentas[j].saldo = this.cuentas[j].saldo + i;
+    }
+    public void RetirarDinero(double i,int j) {
+        this.cuentas[j].saldo = this.cuentas[j].saldo - i;
+    }
+    public double MostrarSaldo(int i) {
+        return this.cuentas[i].saldo;
+    }
+    public void  Transferencia(double i,int j, int x) {
+        if (i > this.cuentas[j].saldo) {
+        }
+        this.cuentas[j].saldo = this.cuentas[j].saldo - i;
+        this.cuentas[x].saldo = this.cuentas[x].saldo + i;
+    }
+    public void CambiarNAN(int i, String j) {
+        this.cuentas[i].setNAN(j);
+    }
+    public void CambiarNombre(int i, String j) {
+        this.cuentas[i].setNombre(j);
+    }
+    public void CambiarApellido(int i, String j) {
+        this.cuentas[i].setApellidos(j);
+    }
+    public void CambiarDireccion(int i, String j) {
+        this.cuentas[i].setDireccion(j);
+    }
+    public void CambiarTelefono(int i, String j) {
+        this.cuentas[i].setTelefono(j);;
+    }
+    public void CambiarComision(int i, int j) {
+        this.cuentas[i].setPorcentaje_comisión(j);
+    }
+    public void CambiarDescubierto(int i,double j) {
+        
+    }
     
     
 
@@ -35,8 +71,8 @@ public class Banco {
         Banco banco = new Banco();    
         
         System.out.println("Ingrese tipo: \n"
-                + "1) Cuentas de Ahorros\n"
-                + "2) Cuenta Corriente\n"
+                + "1) Cuentas Corriente\n"
+                + "2) Cuenta de Ahorros\n"
                 + "3) Finalizar");
         
         int option = sc.nextInt();       
@@ -46,17 +82,60 @@ public class Banco {
         switch(option){
             case 1:
                 System.out.println("Opciones: \n"
-                        + "1) Crear Cuenta de Ahorro\n"
-                        + "2) Cerrar Cuenta de Ahorro\n"
-                        + "3) Cambiar Datos de Cuenta de Ahorro\n"
+                        + "1) Crear Cuenta corriente\n"
+                        + "2) Cerrar Cuenta corriente\n"
+                        + "3) Cambiar Datos de Cuenta corriente\n"
+                        + "4) Ingresar Dinero\n"
+                        + "5) Retirar Dinero\n"
+                        + "6) Mostrar Saldo\n"
+                        + "7) Transferencia\n"                        
+                        + "8) Salir");
+                        int option1 = sc.nextInt();
+                        switch(option1) {
+                            case 1:
+                            Cuenta cuenta1= new Cuenta_Corriente("", "", "", "", "");                    
+                            banco.agregarCuenta(cuenta1);
+                            break;
+                            case 2:
+                            System.out.println("Que cuenta quieres eliminar");
+                             int numero = sc.nextInt();
+                             banco.eliminariCuenta(numero);
+                             System.out.println("Cuenta "+numero+" eliminada exitosamente");
+                             break;
+                            case 3:
+                            System.out.println("Opciones\n"
+                                    + "1.- Cambiar NAN\n" 
+                                    + "2.- Cambiar nombre\n"
+                                    + "3.- Cambiar apellido\n"
+                                    + "4.- Cambiar dirección\n"
+                                    + "5.- Cambiar telefono\n"
+                                    + "6.- Cambiar comisión\n"
+                                    + "7.- Cambiar descubierto\n"
+                                    + "8.-  Finalizar\n");
+                                    int option2 = sc.nextInt();
+                                    switch(option2) {
+                                        case 1:
+                                        System.out.println("i");
+                                    }
+
+                        }
+            case 2:
+                System.out.println("Opciones: \n"
+                        + "1) Crear Cuenta de Ahorros\n"
+                        + "2) Cerrar Cuenta de Ahorros\n"
+                        + "3) Cambiar Datos de Cuenta de Ahorros\n"
                         + "4) Ingresar Dinero\n"
                         + "5) Retirar Dinero\n"
                         + "6) Mostrar Saldo\n"
                         + "7) Calcular Intereses\n"                        
                         + "8) Salir");
-                Cuenta cuenta1= new Cuenta_Ahorros("", "", "", "", "");                    
-                banco.agregarCuenta(cuenta1);
-                break;
+                         option1 = sc.nextInt();
+                         switch(option1) {
+                             case 1:
+                             break;
+            }
+            case 3:
+
             default:
                 break;
         }
@@ -161,20 +240,21 @@ class Cuenta {
 
 class Cuenta_Ahorros extends Cuenta {
     
-    private double gastosTarjeta;
+    private double Descubierto;
 
     public Cuenta_Ahorros(String NAN, String Nombre, String Apellidos,
             String Direccion, String Telefono) {
         super(NAN, Nombre, Apellidos, Direccion, Telefono);
         this.Tipo = "Cuenta de Ahorros";
         this.porcentaje_comision = 0.15;
+        this.Descubierto = 0;
     }
-
     @Override
     public String mostrarDatos() {
         return "Tipo: " + this.Tipo + "\n"
                 + super.mostrarDatos() + "\n"
-                + "Porcentaje de Comisión: " + this.porcentaje_comision;
+                + "Porcentaje de Comisión: " + this.porcentaje_comision
+                + "Descubierto" + this.Descubierto;
     }
 
 }
