@@ -1,6 +1,6 @@
 package kontu_korronteak;
 
-import java.time.chrono.Era;
+
 import java.util.Scanner;
 
 class Bankuetxea {
@@ -48,19 +48,19 @@ public class Kontu_korronteak extends Bankuetxea {
         Komisioa = komisio;
     }
 
-    String[][] Kontu_korrontea_sortu(Kontu_korronteak n1) {
+    String[][] Kontu_korrontea_sortu(String n1, String n2, String n3, String n4, String n5, String n6, String n7) {
         String[][] kontu_korrontea = new String[100][9];
         // String[][] aurrezteko_kontua = new String[100][7];
         // comprobar que tipo de cuenta es
-        kontu_korrontea[0][0] = n1.NAN;
-        kontu_korrontea[0][1] = n1.izena;
-        kontu_korrontea[0][2] = n1.abizena;
-        kontu_korrontea[0][3] = n1.helbidea;
-        kontu_korrontea[0][4] = n1.herria;
-        kontu_korrontea[0][5] = n1.telefonoa;
-        kontu_korrontea[0][6] = n1.kontu_tipo;
-        kontu_korrontea[0][7] = n1.Dirua;
-        kontu_korrontea[0][8] = n1.Komisioa;
+        kontu_korrontea[0][0] = n1;
+        kontu_korrontea[0][1] = n2;
+        kontu_korrontea[0][2] = n3;
+        kontu_korrontea[0][3] = n4;
+        kontu_korrontea[0][4] = n5;
+        kontu_korrontea[0][5] = n6;
+        kontu_korrontea[0][6] = n7;
+        kontu_korrontea[0][7] = "0";
+        kontu_korrontea[0][8] = "15";
         kontu_kopuru++;
         return kontu_korrontea;
     }
@@ -83,26 +83,26 @@ class main {
                 switch (aukera1) {
                     case 1:
                         int kont = 0;
-                        String NAN,izena,abizena,helbidea,herria,telefonoa,kontu_tipo;
+                        Kontu_korronteak kontu1 = new Kontu_korronteak();
                         System.out.println("Sartu NAN-a");
-                        NAN = sc.nextLine();
+                        kontu1.NAN = sc.next();
                         System.out.println("Sartu izena");
-                        izena = sc.nextLine();
+                        kontu1.izena = sc.next();
                         System.out.println("Sartu abizena");
-                        abizena = sc.nextLine();
+                        kontu1.abizena = sc.next();
                         System.out.println("Sartu helbidea");
-                        helbidea = sc.nextLine();
+                        kontu1.helbidea = sc.next();
                         System.out.println("Sartu herria");
-                        herria = sc.nextLine();
+                        kontu1.herria = sc.next();
                         System.out.println("Sartu telefonoa");
-                        telefonoa = sc.nextLine();
+                        kontu1.telefonoa = sc.next();
                         System.out.println("Ze kontu tipo nahi duzu");
-                        kontu_tipo = sc.nextLine();
-                        Kontu_korronteak Erabiltzailea = new Kontu_korronteak(NAN,izena,abizena,helbidea,herria,telefonoa,kontu_tipo,"0","15");
-                        String kontu_korronteak[][] = Erabiltzailea.Kontu_korrontea_sortu(Erabiltzailea);
-                        for (int i = 0;i<kontu_korronteak[Erabiltzailea.kontu_kopuru].length;i++) {
-                            System.out.println(kontu_korronteak[Erabiltzailea.kontu_kopuru][i]);
-                        }
+                        kontu1.kontu_tipo = sc.next();
+                        String kontu_korronteak[][] = kontu1.Kontu_korrontea_sortu(kontu1.NAN,kontu1.izena,kontu1.abizena,kontu1.helbidea,kontu1.herria,kontu1.telefonoa,kontu1.kontu_tipo);
+                            for (int j =0;j<kontu_korronteak[0].length;j++) {
+                            System.out.println(kontu_korronteak[0][j]);
+                            }
+                        break;
                     case 3:
                         System.out.println(
                                 "1.NAN aldatu\n2.Izena aldatu\n3.Abizenak aldatu\n4.Helbidea aldatu\n5.Telefonoa aldatu\n6.Komisioa aldatu\n7.Zorpekoa(descubierto) aldatu\n8.Bukatu");
