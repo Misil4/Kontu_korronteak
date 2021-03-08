@@ -2,6 +2,7 @@
 package kontu_korronteak;
 
 import java.util.Scanner;
+
 public class Banco {
 
     Cuenta cuentas[];
@@ -55,11 +56,8 @@ public class Banco {
     public void CambiarTelefono(int i, String j) {
         this.cuentas[i].setTelefono(j);;
     }
-    public void CambiarComision(int i, int j) {
+    public void CambiarComision(int i, double j) {
         this.cuentas[i].setPorcentaje_comisión(j);
-    }
-    public void CambiarDescubierto(int i,double j) {
-        
     }
     
     
@@ -103,6 +101,8 @@ public class Banco {
                              System.out.println("Cuenta "+numero+" eliminada exitosamente");
                              break;
                             case 3:
+                            System.out.println("A que cuenta quieres editarle los atributos");
+                            numero = sc.nextInt();
                             System.out.println("Opciones\n"
                                     + "1.- Cambiar NAN\n" 
                                     + "2.- Cambiar nombre\n"
@@ -115,7 +115,34 @@ public class Banco {
                                     int option2 = sc.nextInt();
                                     switch(option2) {
                                         case 1:
-                                        System.out.println("i");
+                                        System.out.println("Escribe el nuevo NAN");
+                                        String NAN = sc.next();
+                                        banco.CambiarNAN(numero, NAN);
+                                        break;
+                                        case 2:
+                                        System.out.println("Escribe un nuevo nombre");
+                                        String Nombre = sc.next();
+                                        banco.CambiarNombre(numero, Nombre);
+                                        break;
+                                        case 3:
+                                        System.out.println("Escribe nuevos apellidos");
+                                        String Apellidos = sc.next();
+                                        banco.CambiarApellido(numero, Apellidos);
+                                        break;
+                                        case 4:
+                                        System.out.println("Escribe una nueva dirección");
+                                        String Direccion = sc.next();
+                                        banco.CambiarDireccion(numero, Direccion);
+                                        break;
+                                        case 5:
+                                        System.out.println("Escribe un nuevo telefono");
+                                        String Telefono = sc.next();
+                                        banco.CambiarNombre(numero, Telefono);
+                                        break;
+                                        case 6:
+                                        System.out.println("Escribe una nueva comision por transaccion");
+                                        double Comision = sc.nextDouble();
+                                        banco.CambiarComision(numero, Comision);
                                     }
 
                         }
