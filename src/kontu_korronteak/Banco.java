@@ -2,7 +2,6 @@
 package kontu_korronteak;
 
 import java.util.Scanner;
-
 public class Banco {
 
     Cuenta cuentas[];
@@ -66,8 +65,9 @@ public class Banco {
         
         Scanner sc = new Scanner(System.in);
         
-        Banco banco = new Banco();    
-        
+        Banco banco = new Banco(); 
+        int option1= 0;   
+        while (option1!=8) {
         System.out.println("Ingrese tipo: \n"
                 + "1) Cuentas Corriente\n"
                 + "2) Cuenta de Ahorros\n"
@@ -88,7 +88,7 @@ public class Banco {
                         + "6) Mostrar Saldo\n"
                         + "7) Transferencia\n"                        
                         + "8) Salir");
-                        int option1 = sc.nextInt();
+                         option1 = sc.nextInt();
                         switch(option1) {
                             case 1:
                             Cuenta cuenta1= new Cuenta_Corriente("", "", "", "", "");                    
@@ -97,12 +97,20 @@ public class Banco {
                             case 2:
                             System.out.println("Que cuenta quieres eliminar");
                              int numero = sc.nextInt();
+                             if (banco.cuentas[numero] ==null) {
+                                 System.out.println("Sartu duzun kontua ez da existitzen");
+                                 break;
+                             }
                              banco.eliminariCuenta(numero);
                              System.out.println("Cuenta "+numero+" eliminada exitosamente");
                              break;
                             case 3:
                             System.out.println("A que cuenta quieres editarle los atributos");
                             numero = sc.nextInt();
+                            if (banco.cuentas[numero] ==null) {
+                                System.out.println("Sartu duzun kontua ez da existitzen");
+                                break;
+                            }
                             System.out.println("Opciones\n"
                                     + "1.- Cambiar NAN\n" 
                                     + "2.- Cambiar nombre\n"
@@ -143,25 +151,189 @@ public class Banco {
                                         System.out.println("Escribe una nueva comision por transaccion");
                                         double Comision = sc.nextDouble();
                                         banco.CambiarComision(numero, Comision);
+                                        break;
                                     }
+                                    case 4:
+                                    System.out.println("Introduzca numero de cuenta a la que ingresar");
+                                    numero = sc.nextInt();
+                                    if (banco.cuentas[numero] ==null) {
+                                 System.out.println("Sartu duzun kontua ez da existitzen");
+                                 break;
+                                    }
+                                    System.out.println("Introduzca cantidad a ingresar");
+                                    double cantidad = sc.nextDouble();
+                                    banco.IngresarDinero(cantidad, numero);
+                                    System.out.println("Dinero ingresado correctamente \nCantidad actual: "+banco.cuentas[numero].saldo);
+                                    break;
+                                    case 5:
+                                    System.out.println("Introduzca numero de cuenta de la que quiere retirar");
+                                    numero = sc.nextInt();
+                                    if (banco.cuentas[numero] ==null) {
+                                        System.out.println("Sartu duzun kontua ez da existitzen");
+                                        break;
+                                           }
+                                    System.out.println("Introduzca cantidad a retirar");
+                                    cantidad = sc.nextDouble();
+                                    if (banco.cuentas[numero].saldo < 0) {
+                                        System.out.println("No tienes saldo suficiente");
+                                        break;
+                                    }
+                                    banco.RetirarDinero(cantidad, numero);
+                                    cantidad = banco.MostrarSaldo(numero);
+                                    System.out.println("Dinero retirado correctamente\nCantidad actual: "+cantidad);
+                                    break;
+                                    case 6: 
+                                    System.out.println("Introduzca un numero de cuenta");
+                                    numero = sc.nextInt();
+                                    if (banco.cuentas[numero] ==null) {
+                                        System.out.println("Sartu duzun kontua ez da existitzen");
+                                        break;
+                                           }
+                                    cantidad = banco.MostrarSaldo(numero);
+                                    System.out.println("Saldo actual: "+cantidad);
+                                    break;
+                                    case 7:
+                                    System.out.println("Introduzca cuenta de origen");
+                                    numero = sc.nextInt();
+                                    if (banco.cuentas[numero] ==null) {
+                                        System.out.println("Sartu duzun kontua ez da existitzen");
+                                        break;
+                                           }
+                                    System.out.println("Introduzca cuenta a la que quiere ingresar");
+                                    int numero1 = sc.nextInt();
+                                    if (banco.cuentas[numero1] ==null) {
+                                        System.out.println("Sartu duzun kontua ez da existitzen");
+                                        break;
+                                           }
+                                    System.out.println("Introduzca la cantidad a transferir");
+                                    cantidad = sc.nextDouble();
+                                    banco.Transferencia(cantidad, numero, numero1);
+                                    System.out.println("Cantidad Transferida correctamente\nSaldo cuenta 1: "+banco.cuentas[numero].saldo+"\n"+"cuenta 2: "+banco.cuentas[numero1].saldo);
 
                         }
+                        break;
             case 2:
-                System.out.println("Opciones: \n"
-                        + "1) Crear Cuenta de Ahorros\n"
-                        + "2) Cerrar Cuenta de Ahorros\n"
-                        + "3) Cambiar Datos de Cuenta de Ahorros\n"
-                        + "4) Ingresar Dinero\n"
-                        + "5) Retirar Dinero\n"
-                        + "6) Mostrar Saldo\n"
-                        + "7) Calcular Intereses\n"                        
-                        + "8) Salir");
-                         option1 = sc.nextInt();
-                         switch(option1) {
-                             case 1:
-                             break;
-            }
+            System.out.println("Opciones: \n"
+                    + "1) Crear Cuenta de Ahorros\n"
+                    + "2) Cerrar Cuenta de Ahorros\n"
+                    + "3) Cambiar Datos de Cuenta de Ahorros\n"
+                    + "4) Ingresar Dinero\n"
+                    + "5) Retirar Dinero\n"
+                    + "6) Mostrar Saldo\n"
+                    + "7) Calcular Intereses\n"                        
+                    + "8) Salir");
+                    option1 = sc.nextInt();
+                    switch(option1) {
+                        case 1:
+                        Cuenta cuenta1= new Cuenta_Ahorros("", "", "", "", "");                      
+                        banco.agregarCuenta(cuenta1);
+                        break;
+                        case 2:
+                        System.out.println("Que cuenta quieres eliminar");
+                         int numero = sc.nextInt();
+                         banco.eliminariCuenta(numero);
+                         System.out.println("Cuenta "+numero+" eliminada exitosamente");
+                         break;
+                        case 3:
+                        System.out.println("A que cuenta quieres editarle los atributos");
+                        numero = sc.nextInt();
+                        if (banco.cuentas[numero] ==null) {
+                            System.out.println("Sartu duzun kontua ez da existitzen");
+                            break;
+                               }
+                        System.out.println("Opciones\n"
+                                + "1.- Cambiar NAN\n" 
+                                + "2.- Cambiar nombre\n"
+                                + "3.- Cambiar apellido\n"
+                                + "4.- Cambiar dirección\n"
+                                + "5.- Cambiar telefono\n"
+                                + "6.- Cambiar comisión\n"
+                                + "7.- Cambiar descubierto\n"
+                                + "8.-  Finalizar\n");
+                                int option2 = sc.nextInt();
+                                switch(option2) {
+                                    case 1:
+                                    System.out.println("Escribe el nuevo NAN");
+                                    String NAN = sc.next();
+                                    banco.CambiarNAN(numero, NAN);
+                                    break;
+                                    case 2:
+                                    System.out.println("Escribe un nuevo nombre");
+                                    String Nombre = sc.next();
+                                    banco.CambiarNombre(numero, Nombre);
+                                    break;
+                                    case 3:
+                                    System.out.println("Escribe nuevos apellidos");
+                                    String Apellidos = sc.next();
+                                    banco.CambiarApellido(numero, Apellidos);
+                                    break;
+                                    case 4:
+                                    System.out.println("Escribe una nueva dirección");
+                                    String Direccion = sc.next();
+                                    banco.CambiarDireccion(numero, Direccion);
+                                    break;
+                                    case 5:
+                                    System.out.println("Escribe un nuevo telefono");
+                                    String Telefono = sc.next();
+                                    banco.CambiarNombre(numero, Telefono);
+                                    break;
+                                    case 6:
+                                    System.out.println("Escribe una nueva comision por transaccion");
+                                    double Comision = sc.nextDouble();
+                                    banco.CambiarComision(numero, Comision);
+                                }
+                                break;
+                                case 4:
+                                System.out.println("Introduzca numero de cuenta a la que ingresar");
+                                numero = sc.nextInt();
+                                if (banco.cuentas[numero] ==null) {
+                                    System.out.println("Sartu duzun kontua ez da existitzen");
+                                    break;
+                                       }
+                                System.out.println("Introduzca cantidad a ingresar");
+                                double cantidad = sc.nextDouble();
+                                banco.IngresarDinero(cantidad, numero);
+                                cantidad = banco.MostrarSaldo(numero);
+                                System.out.println("Dinero ingresado correctamente \nCantidad actual: "+cantidad);
+                                break;
+                                case 5:
+                                System.out.println("Introduzca numero de cuenta de la que quiere retirar");
+                                numero = sc.nextInt();
+                                if (banco.cuentas[numero] ==null) {
+                                    System.out.println("Sartu duzun kontua ez da existitzen");
+                                    break;
+                                       }
+                                System.out.println("Introduzca cantidad a retirar");
+                                cantidad = sc.nextDouble();
+                                if (banco.cuentas[numero].saldo < 0) {
+                                    System.out.println("No tienes saldo suficiente");
+                                    break;
+                                }
+                                banco.RetirarDinero(cantidad, numero);
+                                cantidad = banco.MostrarSaldo(numero);
+                                System.out.println("Dinero retirado correctamente \nCantidad actual: "+cantidad);
+                                break;
+                                case 6: 
+                                System.out.println("Introduzca un numero de cuenta");
+                                numero = sc.nextInt();
+                                if (banco.cuentas[numero] ==null) {
+                                    System.out.println("Sartu duzun kontua ez da existitzen");
+                                    break;
+                                       }
+                                cantidad = banco.MostrarSaldo(numero);
+                                System.out.println("Saldo actual: "+cantidad);
+                                break;
+                                case 7:
+                                break;
+                                case 8:
+                                break;
+                                default:
+                                break;
+                            }
+
+
             case 3:
+            System.exit(0);
 
             default:
                 break;
@@ -170,7 +342,7 @@ public class Banco {
         
         
        
-        
+    }  
     }
 }
 
