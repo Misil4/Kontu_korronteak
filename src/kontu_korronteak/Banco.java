@@ -98,7 +98,7 @@ public class Banco {
                             System.out.println("Que cuenta quieres eliminar");
                              int numero = sc.nextInt();
                              if (banco.cuentas[numero] ==null) {
-                                 System.out.println("Sartu duzun kontua ez da existitzen");
+                                 System.out.println("El numero de cuenta que has introducido no existe");
                                  break;
                              }
                              banco.eliminariCuenta(numero);
@@ -108,7 +108,7 @@ public class Banco {
                             System.out.println("A que cuenta quieres editarle los atributos");
                             numero = sc.nextInt();
                             if (banco.cuentas[numero] ==null) {
-                                System.out.println("Sartu duzun kontua ez da existitzen");
+                                System.out.println("El numero de cuenta que has introducido no existe");
                                 break;
                             }
                             System.out.println("Opciones\n"
@@ -157,7 +157,7 @@ public class Banco {
                                     System.out.println("Introduzca numero de cuenta a la que ingresar");
                                     numero = sc.nextInt();
                                     if (banco.cuentas[numero] ==null) {
-                                 System.out.println("Sartu duzun kontua ez da existitzen");
+                                 System.out.println("El numero de cuenta que has introducido no existe");
                                  break;
                                     }
                                     System.out.println("Introduzca cantidad a ingresar");
@@ -169,7 +169,7 @@ public class Banco {
                                     System.out.println("Introduzca numero de cuenta de la que quiere retirar");
                                     numero = sc.nextInt();
                                     if (banco.cuentas[numero] ==null) {
-                                        System.out.println("Sartu duzun kontua ez da existitzen");
+                                        System.out.println("El numero de cuenta que has introducido no existe");
                                         break;
                                            }
                                     System.out.println("Introduzca cantidad a retirar");
@@ -186,7 +186,7 @@ public class Banco {
                                     System.out.println("Introduzca un numero de cuenta");
                                     numero = sc.nextInt();
                                     if (banco.cuentas[numero] ==null) {
-                                        System.out.println("Sartu duzun kontua ez da existitzen");
+                                        System.out.println("El numero de cuenta que has introducido no existe");
                                         break;
                                            }
                                     cantidad = banco.MostrarSaldo(numero);
@@ -196,13 +196,13 @@ public class Banco {
                                     System.out.println("Introduzca cuenta de origen");
                                     numero = sc.nextInt();
                                     if (banco.cuentas[numero] ==null) {
-                                        System.out.println("Sartu duzun kontua ez da existitzen");
+                                        System.out.println("El numero de cuenta que has introducido no existe");
                                         break;
                                            }
                                     System.out.println("Introduzca cuenta a la que quiere ingresar");
                                     int numero1 = sc.nextInt();
                                     if (banco.cuentas[numero1] ==null) {
-                                        System.out.println("Sartu duzun kontua ez da existitzen");
+                                        System.out.println("El numero de cuenta que has introducido no existe");
                                         break;
                                            }
                                     System.out.println("Introduzca la cantidad a transferir");
@@ -238,7 +238,7 @@ public class Banco {
                         System.out.println("A que cuenta quieres editarle los atributos");
                         numero = sc.nextInt();
                         if (banco.cuentas[numero] ==null) {
-                            System.out.println("Sartu duzun kontua ez da existitzen");
+                            System.out.println("El numero de cuenta que has introducido no existe");
                             break;
                                }
                         System.out.println("Opciones\n"
@@ -287,7 +287,7 @@ public class Banco {
                                 System.out.println("Introduzca numero de cuenta a la que ingresar");
                                 numero = sc.nextInt();
                                 if (banco.cuentas[numero] ==null) {
-                                    System.out.println("Sartu duzun kontua ez da existitzen");
+                                    System.out.println("El numero de cuenta que has introducido no existe");
                                     break;
                                        }
                                 System.out.println("Introduzca cantidad a ingresar");
@@ -300,7 +300,7 @@ public class Banco {
                                 System.out.println("Introduzca numero de cuenta de la que quiere retirar");
                                 numero = sc.nextInt();
                                 if (banco.cuentas[numero] ==null) {
-                                    System.out.println("Sartu duzun kontua ez da existitzen");
+                                    System.out.println("El numero de cuenta que has introducido no existe");
                                     break;
                                        }
                                 System.out.println("Introduzca cantidad a retirar");
@@ -317,7 +317,7 @@ public class Banco {
                                 System.out.println("Introduzca un numero de cuenta");
                                 numero = sc.nextInt();
                                 if (banco.cuentas[numero] ==null) {
-                                    System.out.println("Sartu duzun kontua ez da existitzen");
+                                    System.out.println("El numero de cuenta que has introducido no existe");
                                     break;
                                        }
                                 cantidad = banco.MostrarSaldo(numero);
