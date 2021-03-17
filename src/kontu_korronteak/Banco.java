@@ -457,13 +457,16 @@ public class Banco
                                 System.out.println("Saldo actual: "+cantidad);
                                 break;
                                 case 7:
+                                System.out.println("Numero de cuenta");
+                                numero = sc.nextInt();
+                                banco.cuentas[numero].mostrarDatos();
                                 break;
                                 case 8:
                                 break;
                                 default:
                                 break;
                             }
-
+break;
 
             case 3:
             System.exit(0);
