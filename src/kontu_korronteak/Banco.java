@@ -154,11 +154,11 @@ public class Banco
                                     double comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
                                     System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
                                     option2 = sc.nextInt();
-                                    if (option2 == 2) 
+                                 if (option2!=1)
                                     {
                                         break;
                                     }
-                                    if (option2 == 1)
+                                    
                                     banco.CobrarComision(numero, comision);
                                     System.out.println("Saldo:"+banco.MostrarSaldo(numero));
                                     switch(option2) 
@@ -203,11 +203,11 @@ public class Banco
                                     comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
                                     System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
                                     option2 = sc.nextInt();
-                                    if (option2 == 2) 
+                                 if (option2!=1)
                                     {
                                         break;
                                     }
-                                    if (option2 == 1)
+                                    
                                     banco.CobrarComision(numero, comision);
                                     System.out.println("Saldo:"+banco.MostrarSaldo(numero));
                                     System.out.println("Introduzca cantidad a ingresar");
@@ -226,11 +226,11 @@ public class Banco
                                            comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
                                            System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
                                            option2 = sc.nextInt();
-                                           if (option2 == 2) 
+                                        if (option2!=1)
                                            {
                                                break;
                                            }
-                                           if (option2 == 1)
+                                           
                                            banco.CobrarComision(numero, comision);
                                            System.out.println("Saldo:"+banco.MostrarSaldo(numero));
                                     System.out.println("Introduzca cantidad a retirar");
@@ -255,11 +255,11 @@ public class Banco
                                            comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
                                            System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
                                            option2 = sc.nextInt();
-                                           if (option2 == 2) 
+                                        if (option2!=1)
                                            {
                                                break;
                                            }
-                                           if (option2 == 1)
+                                           
                                            banco.CobrarComision(numero, comision);
                                            System.out.println("Saldo:"+banco.MostrarSaldo(numero));
                                     cantidad = banco.MostrarSaldo(numero);
@@ -276,11 +276,11 @@ public class Banco
                                            comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
                                            System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
                                            option2 = sc.nextInt();
-                                           if (option2 == 2) 
+                                        if (option2!=1)
                                            {
                                                break;
                                            }
-                                           if (option2 == 1)
+                                           
                                            banco.CobrarComision(numero, comision);
                                            System.out.println("Saldo:"+banco.MostrarSaldo(numero));
                                     System.out.println("Introduzca cuenta a la que quiere ingresar");
@@ -341,11 +341,11 @@ public class Banco
                                 double comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
                                 System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
                                 option2 = sc.nextInt();
-                                if (option2 == 2) 
+                             if (option2!=1)
                                 {
                                     break;
                                 }
-                                if (option2 == 1)
+                                
                                 banco.CobrarComision(numero, comision);
                                 System.out.println("Saldo:"+banco.MostrarSaldo(numero));
                                 switch(option2) 
@@ -393,11 +393,11 @@ public class Banco
                                        comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
                                        System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
                                        option2 = sc.nextInt();
-                                       if (option2 == 2) 
+                                    if (option2!=1)
                                        {
                                            break;
                                        }
-                                       if (option2 == 1)
+                                       
                                        banco.CobrarComision(numero, comision);
                                        System.out.println("Saldo:"+banco.MostrarSaldo(numero));
                                 System.out.println("Introduzca cantidad a ingresar");
@@ -417,11 +417,11 @@ public class Banco
                                        comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
                                        System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
                                        option2 = sc.nextInt();
-                                       if (option2 == 2) 
+                                    if (option2!=1)
                                        {
                                            break;
                                        }
-                                       if (option2 == 1)
+                                       
                                        banco.CobrarComision(numero, comision);
                                        System.out.println("Saldo:"+banco.MostrarSaldo(numero));
                                 System.out.println("Introduzca cantidad a retirar");
@@ -446,11 +446,11 @@ public class Banco
                                        comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
                                        System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
                                        option2 = sc.nextInt();
-                                       if (option2 == 2) 
+                                    if (option2!=1)
                                        {
                                            break;
                                        }
-                                       if (option2 == 1)
+                                       
                                        banco.CobrarComision(numero, comision);
                                        System.out.println("Saldo:"+banco.MostrarSaldo(numero));
                                 cantidad = banco.MostrarSaldo(numero);
