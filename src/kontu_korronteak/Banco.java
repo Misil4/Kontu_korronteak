@@ -6,18 +6,31 @@ public class Banco
 {
 
     Cuenta cuentas[];
-    int contador;    
+    int contador; 
+    String IBAN;  
     
 
     public Banco() 
     {
         this.cuentas = new Cuenta[100];
         this.contador=0;
+        this.IBAN="ES98-2038-5778-98-0000000000";
     }
-    
+    static String ponCerosIzquierda(String N_cuenta,int longitud){
+        String ceros = "";
+        if(N_cuenta.length()<longitud){
+            for(int i=0;i<(longitud-N_cuenta.length());i++){
+                ceros = ceros + '0';
+            }
+            N_cuenta = ceros + N_cuenta;
+        }
+       
+        return N_cuenta;
+    }
     public void agregarCuenta  (Cuenta cuenta)
     {
         this.cuentas[this.contador] = cuenta;
+        this.IBAN="ES98-2038-5778-98-"+ponCerosIzquierda(Integer.toString(contador), 10);
         contador++;
     }
     
@@ -121,6 +134,7 @@ public class Banco
                             case 1:
                             Cuenta cuenta1= new Cuenta_Corriente("", "", "", "", "");                
                             banco.agregarCuenta(cuenta1);
+                            System.out.println("Hau da zure kontu zenbakia "+banco.IBAN);
                             break;
                             case 2:
                             System.out.println("Que cuenta quieres eliminar");
