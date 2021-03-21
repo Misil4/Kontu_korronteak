@@ -63,10 +63,16 @@ public class Banco
         this.cuentas[j].saldo = this.cuentas[j].saldo - i;
         this.cuentas[x].saldo = this.cuentas[x].saldo + i;
     }
-    public double CalcularComision(int x,double y) 
+    public static double CalcularIntereses(int i, double x, double j,int z)
     {
-        y*=this.cuentas[x].porcentaje_comision;
-        return y;
+        x*=(j/100);
+        double intereses = x/z;
+        return intereses;
+    }
+    public double CalcularComision(int x) 
+    {
+        this.cuentas[x].saldo*=this.cuentas[x].porcentaje_comision;
+        return this.cuentas[x].saldo;
     }
     public void CobrarComision(int x,double y)
     {
@@ -90,11 +96,15 @@ public class Banco
     }
     public void CambiarTelefono(int i, String j) 
     {
-        this.cuentas[i].setTelefono(j);;
+        this.cuentas[i].setTelefono(j);
     }
     public void CambiarComision(int i, double j) 
     {
         this.cuentas[i].setPorcentaje_comisión(j);
+    }
+    public void CambiarDescubierto(int i,double j)
+    {
+        this.cuentas[i].setDescubierto(j);
     }
     
     
@@ -105,15 +115,15 @@ public class Banco
         Scanner sc = new Scanner(System.in);
         
         Banco banco = new Banco(); 
-        int option1= 0;   
-        while (option1!=8) 
+        int option = 0;  
+        while (option!=3) 
         {
-        System.out.println("Ingrese tipo: \n"
-                + "1) Cuentas Corriente\n"
+        System.out.println("Bienvenido al Banco Santander, escoja tipo de cuenta a gestionar: \n"
+                + "1) Cuenta Corriente\n"
                 + "2) Cuenta de Ahorros\n"
                 + "3) Finalizar");
         
-        int option = sc.nextInt();       
+         option = sc.nextInt();       
         
         
         
@@ -123,12 +133,13 @@ public class Banco
                         + "1) Crear Cuenta corriente\n"
                         + "2) Cerrar Cuenta corriente\n"
                         + "3) Cambiar Datos de Cuenta corriente\n"
-                        + "4) Ingresar Dinero\n"
-                        + "5) Retirar Dinero\n"
-                        + "6) Mostrar Saldo\n"
-                        + "7) Transferencia\n"                        
+                        + "4) Mostrar Datos\n"
+                        + "5) Ingresar Dinero\n"
+                        + "6) Retirar Dinero\n"
+                        + "7) Mostrar Saldo\n"
+                        + "8) Transferencia\n"                        
                         + "8) Salir");
-                         option1 = sc.nextInt();
+                         int option1 = sc.nextInt();
                         switch(option1) 
                         {
                             case 1:
@@ -162,13 +173,12 @@ public class Banco
                                     + "4.- Cambiar dirección\n"
                                     + "5.- Cambiar telefono\n"
                                     + "6.- Cambiar comisión\n"
-                                    + "7.- Cambiar descubierto\n"
-                                    + "8.-  Finalizar\n");
+                                    + "7.-  Finalizar\n");
                                     int option2 = sc.nextInt();
-                                    double comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
+                                    double comision = banco.CalcularComision(numero);
                                     System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
-                                    option2 = sc.nextInt();
-                                 if (option2!=1)
+                                    int option3 = sc.nextInt();
+                                 if (option3!=1)
                                     {
                                         break;
                                     }
@@ -181,31 +191,63 @@ public class Banco
                                         System.out.println("Escribe el nuevo NAN");
                                         String NAN = sc.next();
                                         banco.CambiarNAN(numero, NAN);
-                                        System.out.println("NAN cambiado correctamente "+ NAN+"\n"+"C");
+                                        System.out.println("NAN cambiado correctamente "+ NAN);
                                         break;
                                         case 2:
                                         System.out.println("Escribe un nuevo nombre");
                                         String Nombre = sc.next();
                                         banco.CambiarNombre(numero, Nombre);
+                                        System.out.println("Nombre cambiado correctamente a "+Nombre);
                                         break;
                                         case 3:
                                         System.out.println("Escribe nuevos apellidos");
                                         String Apellidos = sc.next();
                                         banco.CambiarApellido(numero, Apellidos);
+                                        System.out.println("Apellidos cambiados correctamente a "+Apellidos);
                                         break;
                                         case 4:
                                         System.out.println("Escribe una nueva dirección");
                                         String Direccion = sc.next();
                                         banco.CambiarDireccion(numero, Direccion);
+                                        System.out.println("Direccion cambiada correctamente a "+Direccion);
                                         break;
                                         case 5:
                                         System.out.println("Escribe un nuevo telefono");
                                         String Telefono = sc.next();
-                                        banco.CambiarNombre(numero, Telefono);
+                                        banco.CambiarTelefono(numero, Telefono);
+                                        System.out.println("Telefono cambiado correctamente a "+Telefono);
+                                        break;
+                                        case 6:
+                                        System.out.println("Escriba una nueva comision");
+                                        Double Comision = sc.nextDouble();
+                                        banco.CambiarComision(numero, Comision);
+                                        System.out.println("Comision cambiada correctamente a "+Comision);
+                                        break;
+                                        case 7:
                                         break;
                                     }
                                     break;
                                     case 4:
+                                    System.out.println("Introduzca numero de cuenta de la que ver los datos");
+                                    numero = sc.nextInt();
+                                    if (banco.cuentas[numero] == null) 
+                                    {
+                                 System.out.println("El numero de cuenta que has introducido no existe");
+                                 break;
+                                    }
+                                    comision = banco.CalcularComision(numero);
+                                    System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
+                                    option2 = sc.nextInt();
+                                 if (option2!=1)
+                                    {
+                                        break;
+                                    }
+                                    
+                                    banco.CobrarComision(numero, comision);
+                                    System.out.println("Saldo:"+banco.MostrarSaldo(numero));
+                                    System.out.println(banco.cuentas[numero].mostrarDatos());
+                                    break;
+                                    case 5:
                                     
                                     System.out.println("Introduzca numero de cuenta a la que ingresar");
                                     numero = sc.nextInt();
@@ -214,7 +256,7 @@ public class Banco
                                  System.out.println("El numero de cuenta que has introducido no existe");
                                  break;
                                     }
-                                    comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
+                                    comision = banco.CalcularComision(numero);
                                     System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
                                     option2 = sc.nextInt();
                                  if (option2!=1)
@@ -229,7 +271,7 @@ public class Banco
                                     banco.IngresarDinero(cantidad, numero);
                                     System.out.println("Dinero ingresado correctamente \nCantidad actual: "+banco.cuentas[numero].saldo);
                                     break;
-                                    case 5:
+                                    case 6:
                                     System.out.println("Introduzca numero de cuenta de la que quiere retirar");
                                     numero = sc.nextInt();
                                     if (banco.cuentas[numero] == null) 
@@ -237,7 +279,7 @@ public class Banco
                                         System.out.println("El numero de cuenta que has introducido no existe");
                                         break;
                                            }
-                                           comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
+                                           comision = banco.CalcularComision(numero);
                                            System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
                                            option2 = sc.nextInt();
                                         if (option2!=1)
@@ -258,7 +300,7 @@ public class Banco
                                     cantidad = banco.MostrarSaldo(numero);
                                     System.out.println("Dinero retirado correctamente\nCantidad actual: "+cantidad);
                                     break;
-                                    case 6: 
+                                    case 7: 
                                     System.out.println("Introduzca un numero de cuenta");
                                     numero = sc.nextInt();
                                     if (banco.cuentas[numero] == null) 
@@ -266,7 +308,7 @@ public class Banco
                                         System.out.println("El numero de cuenta que has introducido no existe");
                                         break;
                                            }
-                                           comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
+                                           comision = banco.CalcularComision(numero);
                                            System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
                                            option2 = sc.nextInt();
                                         if (option2!=1)
@@ -279,7 +321,7 @@ public class Banco
                                     cantidad = banco.MostrarSaldo(numero);
                                     System.out.println("Saldo actual: "+cantidad);
                                     break;
-                                    case 7:
+                                    case 8:
                                     System.out.println("Introduzca cuenta de origen");
                                     numero = sc.nextInt();
                                     if (banco.cuentas[numero] == null) 
@@ -287,7 +329,7 @@ public class Banco
                                         System.out.println("El numero de cuenta que has introducido no existe");
                                         break;
                                            }
-                                           comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
+                                           comision = banco.CalcularComision(numero);
                                            System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
                                            option2 = sc.nextInt();
                                         if (option2!=1)
@@ -308,7 +350,9 @@ public class Banco
                                     cantidad = sc.nextDouble();
                                     banco.Transferencia(cantidad, numero, numero1);
                                     System.out.println("Cantidad Transferida correctamente\nSaldo cuenta 1: "+banco.cuentas[numero].saldo+"\n"+"cuenta 2: "+banco.cuentas[numero1].saldo);
-
+                                           break;
+                                           case 9:
+                                           break;
                         }
                         break;
             case 2:
@@ -325,9 +369,10 @@ public class Banco
                     switch(option1) 
                     {
                         case 1:
-                        Cuenta cuenta1= new Cuenta_Ahorros("", "", "", "", "");                      
-                        banco.agregarCuenta(cuenta1);
-                        break;
+                            Cuenta cuenta1= new Cuenta_Ahorros("", "", "", "", "");                
+                            banco.agregarCuenta(cuenta1);
+                            System.out.println("Hau da zure kontu zenbakia "+banco.IBAN);
+                            break;
                         case 2:
                         System.out.println("Que cuenta quieres eliminar");
                          int numero = sc.nextInt();
@@ -352,10 +397,10 @@ public class Banco
                                 + "7.- Cambiar descubierto\n"
                                 + "8.-  Finalizar\n");
                                 int option2 = sc.nextInt();
-                                double comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
+                                double comision = banco.CalcularComision(numero);
                                 System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
-                                option2 = sc.nextInt();
-                             if (option2!=1)
+                                int option3 = sc.nextInt();
+                             if (option3!=1)
                                 {
                                     break;
                                 }
@@ -368,32 +413,44 @@ public class Banco
                                     System.out.println("Escribe el nuevo NAN");
                                     String NAN = sc.next();
                                     banco.CambiarNAN(numero, NAN);
+                                    System.out.println("NAN cambiado correctamente "+ NAN);
                                     break;
                                     case 2:
                                     System.out.println("Escribe un nuevo nombre");
                                     String Nombre = sc.next();
                                     banco.CambiarNombre(numero, Nombre);
+                                    System.out.println("Nombre cambiado correctamente "+ Nombre);
                                     break;
                                     case 3:
                                     System.out.println("Escribe nuevos apellidos");
                                     String Apellidos = sc.next();
                                     banco.CambiarApellido(numero, Apellidos);
+                                    System.out.println("Apellidos cambiados correctamente "+ Apellidos);
                                     break;
                                     case 4:
                                     System.out.println("Escribe una nueva dirección");
                                     String Direccion = sc.next();
                                     banco.CambiarDireccion(numero, Direccion);
+                                    System.out.println("Direccion cambiada correctamente "+ Direccion);
                                     break;
                                     case 5:
                                     System.out.println("Escribe un nuevo telefono");
                                     String Telefono = sc.next();
-                                    banco.CambiarNombre(numero, Telefono);
+                                    banco.CambiarTelefono(numero, Telefono);
+                                    System.out.println("Telefono cambiado correctamente "+ Telefono);
                                     break;
                                     case 6:
                                     System.out.println("Escribe una nueva comision por transaccion");
                                     double Comision = sc.nextDouble();
                                     banco.CambiarComision(numero, Comision);
+                                    System.out.println("Comision cambiada correctamente "+ Comision);
                                     break;
+                                    case 7:
+                                    System.out.println("Escribe un nuevo descubierto para la cuenta");
+                                    double Descubierto = sc.nextDouble();
+                                    banco.CambiarDescubierto(numero, Descubierto);
+                                    System.out.println("Descubierto cambiado correctamente "+ Descubierto);
+
                                 }
                                 break;
                                 case 4:
@@ -404,7 +461,7 @@ public class Banco
                                     System.out.println("El numero de cuenta que has introducido no existe");
                                     break;
                                        }
-                                       comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
+                                       comision = banco.CalcularComision(numero);
                                        System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
                                        option2 = sc.nextInt();
                                     if (option2!=1)
@@ -428,7 +485,7 @@ public class Banco
                                     System.out.println("El numero de cuenta que has introducido no existe");
                                     break;
                                        }
-                                       comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
+                                       comision = banco.CalcularComision(numero);
                                        System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
                                        option2 = sc.nextInt();
                                     if (option2!=1)
@@ -457,7 +514,7 @@ public class Banco
                                     System.out.println("El numero de cuenta que has introducido no existe");
                                     break;
                                        }
-                                       comision = banco.CalcularComision(numero, banco.cuentas[numero].saldo);
+                                       comision = banco.CalcularComision(numero);
                                        System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
                                        option2 = sc.nextInt();
                                     if (option2!=1)
@@ -471,19 +528,38 @@ public class Banco
                                 System.out.println("Saldo actual: "+cantidad);
                                 break;
                                 case 7:
-                                System.out.println("Numero de cuenta");
+                                System.out.println("Introduzca numero de cuenta de la que quiere calcular los intereses");
                                 numero = sc.nextInt();
-                                banco.cuentas[numero].mostrarDatos();
+                                if (banco.cuentas[numero] == null) 
+                                {
+                                    System.out.println("El numero de cuenta que has introducido no existe");
+                                    break;
+                                       }
+                                       comision = banco.CalcularComision(numero);
+                                       System.out.println("Para hacer la operacion se le cobrara una comision de "+comision+" euros\nQuiere seguir adelante?\n1) Si\n2) No");
+                                       option2 = sc.nextInt();
+                                    if (option2!=1)
+                                       {
+                                           break;
+                                       }
+                                       banco.CobrarComision(numero, comision);
+                                       System.out.println("Introduzca cantidad para el prestamo");
+                                       cantidad = sc.nextDouble();
+                                       System.out.println("Introduzca interes");
+                                       int interes = sc.nextInt();
+                                       System.out.println("Introduzca el numero de meses en los cuales quiere pagar el prestamo");
+                                       int N_meses = sc.nextInt();
+                                       System.out.println("Esto es lo que tendra que pagar mensualmente: "+CalcularIntereses(numero, cantidad, interes, N_meses));
                                 break;
                                 case 8:
                                 break;
                                 default:
                                 break;
                             }
-break;
+        break;
 
             case 3:
-            System.exit(0);
+            break;
 
             default:
                 break;
@@ -575,6 +651,15 @@ class Cuenta {
     public void setPorcentaje_comisión(double porcentaje_comisión) {
         this.porcentaje_comision = porcentaje_comisión;
     }
+    public void setDescubierto(double x)
+    {
+        Cuenta_Ahorros cuenta = new Cuenta_Ahorros(NAN, Nombre, Apellidos, Direccion, Telefono);
+        x = cuenta.Descubierto;
+    }
+    public double getDescubierto() {
+        Cuenta_Ahorros cuenta = new Cuenta_Ahorros(NAN, Nombre, Apellidos, Direccion, Telefono);
+        return cuenta.Descubierto;
+    }
 
     public String mostrarDatos() {
         return "NAN: " + this.NAN + "\n"
@@ -589,7 +674,7 @@ class Cuenta {
 
 class Cuenta_Ahorros extends Cuenta {
     
-    private double Descubierto;
+    protected double Descubierto;
 
     public Cuenta_Ahorros(String NAN, String Nombre, String Apellidos,
             String Direccion, String Telefono) {
